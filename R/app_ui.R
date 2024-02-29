@@ -14,22 +14,7 @@ app_ui <- function(request) {
       sidebar = bslib::sidebar(
         title = "Control Panel",
 
-        shiny::selectInput(
-          inputId = "state",
-          label = "Select State",
-          choices = get_choices(sales_data, "STATE")
-        ),
-
-        shiny::selectInput(
-          inputId = "product_line",
-          label = "Select Product Line",
-          choices = get_choices(sales_data, "PRODUCTLINE")
-        ),
-
-        shiny::actionButton(
-          inputId = "apply",
-          label = "Apply"
-        )
+        mod_filters_ui("filters_1")
       ),
 
       bslib::nav_panel(
