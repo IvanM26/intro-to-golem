@@ -37,7 +37,7 @@ app_ui <- function(request) {
       ),
 
       shiny::fluidRow(
-        reactable::reactableOutput(outputId = "table_orders")
+        reactable::reactableOutput(outputId = "table_orders", width = "100%")
       )
     )
   )
