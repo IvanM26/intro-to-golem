@@ -11,7 +11,7 @@ mod_page1_ui <- function(id){
   ns <- NS(id)
   tagList(
     bslib::card(
-      bslib::card_header("Sales by City"),
+      bslib::card_header(shiny::textOutput(outputId = ns("card_header"))),
       echarts4r::echarts4rOutput(outputId = ns("chart_sales_by_city"))
     )
   )
@@ -20,9 +20,13 @@ mod_page1_ui <- function(id){
 #' page1 Server Functions
 #'
 #' @noRd
-mod_page1_server <- function(id, data){
+mod_page1_server <- function(id, data, rctv_inputs){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
+
+    output$card_header <- shiny::renderText({
+      glue::glue("{ rctv_inputs$product_line } sales by City in { rctv_inputs$state }")
+    })
 
     output$chart_sales_by_city <- echarts4r::renderEcharts4r({
       create_chart(data())

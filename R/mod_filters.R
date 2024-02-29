@@ -34,9 +34,15 @@ mod_filters_ui <- function(id){
 #' filters Server Functions
 #'
 #' @noRd
-mod_filters_server <- function(id){
+mod_filters_server <- function(id, rctv_inputs){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
+
+    shiny::observe({
+      rctv_inputs$product_line <- input$product_line
+      rctv_inputs$state <- input$state
+    }) |>
+      shiny::bindEvent(input$apply)
 
     rctv_data_filtered <- shiny::reactive({
       sales_data |>
