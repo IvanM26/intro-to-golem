@@ -19,7 +19,8 @@ app_ui <- function(request) {
 
       bslib::nav_panel(
         title = "Sales by City",
-        echarts4r::echarts4rOutput(outputId = "chart_sales_by_city")
+
+        mod_page1_ui("page1_1")
       ),
 
       bslib::nav_panel(
