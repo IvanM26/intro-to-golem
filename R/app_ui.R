@@ -9,8 +9,36 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    fluidPage(
-      h1("intro.to.golem")
+    bslib::page_sidebar(
+      title = "Sales Data Dashboard",
+      sidebar = bslib::sidebar(
+        title = "Control Panel",
+
+        shiny::selectInput(
+          inputId = "state",
+          label = "Select State",
+          choices = sales_data$STATE |> unique() |> sort()
+        ),
+
+        shiny::selectInput(
+          inputId = "product_line",
+          label = "Select Product Line",
+          choices = sales_data$PRODUCTLINE |> unique() |> sort()
+        ),
+
+        shiny::actionButton(
+          inputId = "apply",
+          label = "Apply"
+        )
+      ),
+
+      shiny::fluidRow(
+        echarts4r::echarts4rOutput(outputId = "chart_sales_by_city")
+      ),
+
+      shiny::fluidRow(
+        reactable::reactableOutput(outputId = "table_orders")
+      )
     )
   )
 }
