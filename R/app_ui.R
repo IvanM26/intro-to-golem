@@ -9,7 +9,7 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    bslib::page_sidebar(
+    bslib::page_navbar(
       title = "Sales Data Dashboard",
       sidebar = bslib::sidebar(
         title = "Control Panel",
@@ -32,13 +32,16 @@ app_ui <- function(request) {
         )
       ),
 
-      shiny::fluidRow(
+      bslib::nav_panel(
+        title = "Sales by City",
         echarts4r::echarts4rOutput(outputId = "chart_sales_by_city")
       ),
 
-      shiny::fluidRow(
+      bslib::nav_panel(
+        title = "Orders Details",
         reactable::reactableOutput(outputId = "table_orders", width = "100%")
       )
+
     )
   )
 }
